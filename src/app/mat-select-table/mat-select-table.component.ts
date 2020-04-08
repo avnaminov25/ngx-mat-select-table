@@ -70,6 +70,8 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
    */
   @Input() customTriggerLabelFn: (value: MatSelectTableRow[]) => string;
 
+  @Input() customTriggerLabelSortField: string;
+
   /**
    * Template to customize the default trigger label. Has lesser priority than {@see MatSelectTableComponent#customTriggerLabelFn}.
    * Substitution is case sensitive.
@@ -404,7 +406,10 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
   }
 
   simpleTriggerLabelFn(value: MatSelectTableRow[]): string {
-    return value.map(row => {
+    if (this.customTriggerLabelSortField) {
+      this.sortData(value, this.sort.active, this.sort.direction);
+    }
+    const list = value.map(row => {
       if (isNullOrUndefined(row)) {
         return '';
       }
@@ -420,7 +425,8 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
         return `${row.id}`;
       }
       return substitution.trim();
-    }).join(', ');
+    });
+    return list.join(', $ ');
   }
 
   toggleOverallSearch(): void {
