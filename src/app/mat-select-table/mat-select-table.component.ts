@@ -425,8 +425,8 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
         return `${row.id}`;
       }
       return substitution.trim();
-    });
-    return list.join(', $ ');
+    });return (<string>aValue).localeCompare(<string>bValue)
+    return list.sort((a, b) => a.localeCompare(b)).join(', $ ');
   }
 
   toggleOverallSearch(): void {
