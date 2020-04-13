@@ -480,7 +480,11 @@
          */
             function (value) {
                 var _this = this;
-                return value.map(( /**
+                if (this.customTriggerLabelSortField) {
+                    this.sortData(value, this.sort.active, this.sort.direction);
+                }
+                /** @type {?} */
+                var list = value.map(( /**
                  * @param {?} row
                  * @return {?}
                  */function (row) {
@@ -506,7 +510,12 @@
                         return "" + row.id;
                     }
                     return substitution.trim();
-                })).join(', ');
+                }));
+                return list.sort(( /**
+                 * @param {?} a
+                 * @param {?} b
+                 * @return {?}
+                 */function (a, b) { return a.localeCompare(b); })).join(', $ ');
             };
         /**
          * @return {?}
@@ -970,6 +979,7 @@
             resetSortOnOpen: [{ type: core.Input }],
             resetFiltersOnOpen: [{ type: core.Input }],
             customTriggerLabelFn: [{ type: core.Input }],
+            customTriggerLabelSortField: [{ type: core.Input }],
             customTriggerLabelTemplate: [{ type: core.Input }],
             labelForNullValue: [{ type: core.Input }],
             matSelectConfigurator: [{ type: core.Input }],
