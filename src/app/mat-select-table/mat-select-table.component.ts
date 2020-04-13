@@ -406,10 +406,7 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
   }
 
   simpleTriggerLabelFn(value: MatSelectTableRow[]): string {
-    if (this.customTriggerLabelSortField) {
-      this.sortData(value, this.sort.active, this.sort.direction);
-    }
-    const list = value.map(row => {
+    return value.map(row => {
       if (isNullOrUndefined(row)) {
         return '';
       }
@@ -425,8 +422,7 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
         return `${row.id}`;
       }
       return substitution.trim();
-    });
-    return list.sort((a, b) => a.localeCompare(b)).join(', $ ');
+    }).sort((a, b) => a.localeCompare(b)).join(',_');
   }
 
   toggleOverallSearch(): void {
