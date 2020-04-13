@@ -568,6 +568,9 @@
                         _this.completeValueList.push(row.id);
                     }));
                 }));
+                if (!util.isNullOrUndefined(this.triggerLabelSort)) {
+                    this.sortData(this.completeRowList, this.triggerLabelSort.active, this.triggerLabelSort.direction);
+                }
             };
         /**
          * @private

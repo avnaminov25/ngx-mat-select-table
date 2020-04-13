@@ -456,6 +456,9 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
             this.completeValueList.push(row.id);
           });
       });
+	  if (!isNullOrUndefined(this.triggerLabelSort)) {
+		this.sortData(this.completeRowList, this.triggerLabelSort.active, this.triggerLabelSort.direction);
+	  }
   }
 
   private proxyMatSelectSearchConfiguration(configuration: { [key: string]: any }): void {
