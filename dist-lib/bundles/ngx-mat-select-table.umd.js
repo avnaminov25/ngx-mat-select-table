@@ -480,11 +480,7 @@
          */
             function (value) {
                 var _this = this;
-                if (this.customTriggerLabelSortField) {
-                    this.sortData(value, this.sort.active, this.sort.direction);
-                }
-                /** @type {?} */
-                var list = value.map(( /**
+                return value.map(( /**
                  * @param {?} row
                  * @return {?}
                  */function (row) {
@@ -510,12 +506,11 @@
                         return "" + row.id;
                     }
                     return substitution.trim();
-                }));
-                return list.sort(( /**
+                })).sort(( /**
                  * @param {?} a
                  * @param {?} b
                  * @return {?}
-                 */function (a, b) { return a.localeCompare(b); })).join(', $ ');
+                 */function (a, b) { return a.localeCompare(b); })).join(',_');
             };
         /**
          * @return {?}

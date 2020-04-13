@@ -423,11 +423,7 @@ class MatSelectTableComponent {
      * @return {?}
      */
     simpleTriggerLabelFn(value) {
-        if (this.customTriggerLabelSortField) {
-            this.sortData(value, this.sort.active, this.sort.direction);
-        }
-        /** @type {?} */
-        const list = value.map((/**
+        return value.map((/**
          * @param {?} row
          * @return {?}
          */
@@ -453,13 +449,12 @@ class MatSelectTableComponent {
                 return `${row.id}`;
             }
             return substitution.trim();
-        }));
-        return list.sort((/**
+        })).sort((/**
          * @param {?} a
          * @param {?} b
          * @return {?}
          */
-        (a, b) => a.localeCompare(b))).join(', $ ');
+        (a, b) => a.localeCompare(b))).join(',_');
     }
     /**
      * @return {?}
