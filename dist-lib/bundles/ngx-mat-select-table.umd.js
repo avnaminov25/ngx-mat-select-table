@@ -480,7 +480,11 @@
          */
             function (value) {
                 var _this = this;
-                return value.map(( /**
+                if (!util.isNullOrUndefined(this.triggerLabelSort)) {
+                    this.sortData(value, this.triggerLabelSort.active, this.triggerLabelSort.direction);
+                }
+                /** @type {?} */
+                var list = value.map(( /**
                  * @param {?} row
                  * @return {?}
                  */function (row) {
@@ -506,11 +510,8 @@
                         return "" + row.id;
                     }
                     return substitution.trim();
-                })).sort(( /**
-                 * @param {?} a
-                 * @param {?} b
-                 * @return {?}
-                 */function (a, b) { return a.localeCompare(b); })).join(',_');
+                }));
+                return list.join(', ');
             };
         /**
          * @return {?}
@@ -974,7 +975,7 @@
             resetSortOnOpen: [{ type: core.Input }],
             resetFiltersOnOpen: [{ type: core.Input }],
             customTriggerLabelFn: [{ type: core.Input }],
-            customTriggerLabelSortField: [{ type: core.Input }],
+            triggerLabelSort: [{ type: core.Input }],
             customTriggerLabelTemplate: [{ type: core.Input }],
             labelForNullValue: [{ type: core.Input }],
             matSelectConfigurator: [{ type: core.Input }],

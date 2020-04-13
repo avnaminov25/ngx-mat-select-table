@@ -423,7 +423,11 @@ class MatSelectTableComponent {
      * @return {?}
      */
     simpleTriggerLabelFn(value) {
-        return value.map((/**
+        if (!isNullOrUndefined(this.triggerLabelSort)) {
+            this.sortData(value, this.triggerLabelSort.active, this.triggerLabelSort.direction);
+        }
+        /** @type {?} */
+        let list = value.map((/**
          * @param {?} row
          * @return {?}
          */
@@ -449,12 +453,8 @@ class MatSelectTableComponent {
                 return `${row.id}`;
             }
             return substitution.trim();
-        })).sort((/**
-         * @param {?} a
-         * @param {?} b
-         * @return {?}
-         */
-        (a, b) => a.localeCompare(b))).join(',_');
+        }));
+        return list.join(', ');
     }
     /**
      * @return {?}
@@ -873,7 +873,7 @@ MatSelectTableComponent.propDecorators = {
     resetSortOnOpen: [{ type: Input }],
     resetFiltersOnOpen: [{ type: Input }],
     customTriggerLabelFn: [{ type: Input }],
-    customTriggerLabelSortField: [{ type: Input }],
+    triggerLabelSort: [{ type: Input }],
     customTriggerLabelTemplate: [{ type: Input }],
     labelForNullValue: [{ type: Input }],
     matSelectConfigurator: [{ type: Input }],
