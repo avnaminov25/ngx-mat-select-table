@@ -412,7 +412,7 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
     if (!isNullOrUndefined(this.triggerLabelSort)) {
       this.sortData(value, this.triggerLabelSort.active, this.triggerLabelSort.direction);
     }
-    let list = value.map(row => {
+    return value.map(row => {
       if (isNullOrUndefined(row)) {
         return '';
       }
@@ -428,8 +428,7 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
         return `${row.id}`;
       }
       return substitution.trim();
-    });
-    return list.join(', ');
+    }).join(', ');
   }
 
   toggleOverallSearch(): void {

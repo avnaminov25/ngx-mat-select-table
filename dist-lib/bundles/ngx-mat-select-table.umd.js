@@ -483,8 +483,7 @@
                 if (!util.isNullOrUndefined(this.triggerLabelSort)) {
                     this.sortData(value, this.triggerLabelSort.active, this.triggerLabelSort.direction);
                 }
-                /** @type {?} */
-                var list = value.map(( /**
+                return value.map(( /**
                  * @param {?} row
                  * @return {?}
                  */function (row) {
@@ -510,8 +509,7 @@
                         return "" + row.id;
                     }
                     return substitution.trim();
-                }));
-                return list.join(', ');
+                })).join(', ');
             };
         /**
          * @return {?}

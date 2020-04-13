@@ -426,8 +426,7 @@ class MatSelectTableComponent {
         if (!isNullOrUndefined(this.triggerLabelSort)) {
             this.sortData(value, this.triggerLabelSort.active, this.triggerLabelSort.direction);
         }
-        /** @type {?} */
-        let list = value.map((/**
+        return value.map((/**
          * @param {?} row
          * @return {?}
          */
@@ -453,8 +452,7 @@ class MatSelectTableComponent {
                 return `${row.id}`;
             }
             return substitution.trim();
-        }));
-        return list.join(', ');
+        })).join(', ');
     }
     /**
      * @return {?}
