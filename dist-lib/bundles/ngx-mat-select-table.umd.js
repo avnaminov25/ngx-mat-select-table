@@ -935,7 +935,7 @@
                         return (-1) * (_this.sort.direction === 'asc' ? 1 : -1);
                     }
                     // Compare as Numbers otherwise
-                    return (aValue > bValue ? 1 : -1) * (_this.sort.direction === 'asc' ? 1 : -1);
+                    return (aValue > bValue ? 1 : -1) * (direction === 'asc' ? 1 : -1);
                 }));
             };
         /**
