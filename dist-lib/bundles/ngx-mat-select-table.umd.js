@@ -568,12 +568,6 @@
                         _this.completeValueList.push(row.id);
                     }));
                 }));
-                console.log("========");
-                if (!util.isNullOrUndefined(this.triggerLabelSort)) {
-                    console.log(JSON.stringify(this.completeRowList));
-                    this.sortData(this.completeRowList, this.triggerLabelSort.active, this.triggerLabelSort.direction);
-                    console.log(JSON.stringify(this.completeRowList));
-                }
             };
         /**
          * @private
@@ -613,6 +607,9 @@
          */
             function (data) {
                 var _this = this;
+                if (util.isNullOrUndefined(data) || data.length < 1) {
+                    return;
+                }
                 this.filteredOutRows = {};
                 /** @type {?} */
                 var filters = {};
@@ -922,17 +919,17 @@
                     }
                     // User localeCompare for strings
                     if (util.isString(aValue) && util.isString(bValue)) {
-                        return (( /** @type {?} */(aValue))).localeCompare(( /** @type {?} */(bValue))) * (_this.sort.direction === 'asc' ? 1 : -1);
+                        return (( /** @type {?} */(aValue))).localeCompare(( /** @type {?} */(bValue))) * (direction === 'asc' ? 1 : -1);
                     }
                     // Try to convert to a Number type
                     aValue = isNaN(( /** @type {?} */(aValue))) ? "" + aValue : +aValue;
                     bValue = isNaN(( /** @type {?} */(bValue))) ? "" + bValue : +bValue;
                     // if one is number and other is String
                     if (util.isString(aValue) && util.isNumber(bValue)) {
-                        return (1) * (_this.sort.direction === 'asc' ? 1 : -1);
+                        return (1) * (direction === 'asc' ? 1 : -1);
                     }
                     if (util.isNumber(aValue) && util.isString(bValue)) {
-                        return (-1) * (_this.sort.direction === 'asc' ? 1 : -1);
+                        return (-1) * (direction === 'asc' ? 1 : -1);
                     }
                     // Compare as Numbers otherwise
                     return (aValue > bValue ? 1 : -1) * (direction === 'asc' ? 1 : -1);

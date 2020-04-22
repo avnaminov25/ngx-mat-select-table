@@ -506,12 +506,6 @@ class MatSelectTableComponent {
                 this.completeValueList.push(row.id);
             }));
         }));
-        console.log("========");
-        if (!isNullOrUndefined(this.triggerLabelSort)) {
-            console.log(JSON.stringify(this.completeRowList));
-            this.sortData(this.completeRowList, this.triggerLabelSort.active, this.triggerLabelSort.direction);
-            console.log(JSON.stringify(this.completeRowList));
-        }
     }
     /**
      * @private
@@ -541,6 +535,9 @@ class MatSelectTableComponent {
      * @return {?}
      */
     applyColumnLevelFilters(data) {
+        if (isNullOrUndefined(data) || data.length < 1) {
+            return;
+        }
         this.filteredOutRows = {};
         /** @type {?} */
         const filters = {};
@@ -823,17 +820,17 @@ class MatSelectTableComponent {
             }
             // User localeCompare for strings
             if (isString(aValue) && isString(bValue)) {
-                return ((/** @type {?} */ (aValue))).localeCompare((/** @type {?} */ (bValue))) * (this.sort.direction === 'asc' ? 1 : -1);
+                return ((/** @type {?} */ (aValue))).localeCompare((/** @type {?} */ (bValue))) * (direction === 'asc' ? 1 : -1);
             }
             // Try to convert to a Number type
             aValue = isNaN((/** @type {?} */ (aValue))) ? `${aValue}` : +aValue;
             bValue = isNaN((/** @type {?} */ (bValue))) ? `${bValue}` : +bValue;
             // if one is number and other is String
             if (isString(aValue) && isNumber(bValue)) {
-                return (1) * (this.sort.direction === 'asc' ? 1 : -1);
+                return (1) * (direction === 'asc' ? 1 : -1);
             }
             if (isNumber(aValue) && isString(bValue)) {
-                return (-1) * (this.sort.direction === 'asc' ? 1 : -1);
+                return (-1) * (direction === 'asc' ? 1 : -1);
             }
             // Compare as Numbers otherwise
             return (aValue > bValue ? 1 : -1) * (direction === 'asc' ? 1 : -1);

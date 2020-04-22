@@ -456,12 +456,6 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
             this.completeValueList.push(row.id);
           });
       });
-	  console.log("========");
-	  if (!isNullOrUndefined(this.triggerLabelSort)) {
-		console.log(JSON.stringify(this.completeRowList));
-		this.sortData(this.completeRowList, this.triggerLabelSort.active, this.triggerLabelSort.direction);
-		console.log(JSON.stringify(this.completeRowList));
-	  }
   }
 
   private proxyMatSelectSearchConfiguration(configuration: { [key: string]: any }): void {
@@ -476,6 +470,9 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
   }
 
   private applyColumnLevelFilters(data: MatSelectTableRow[]): void {
+	if (isNullOrUndefined(data) || data.length < 1) {
+      return;
+    }
     this.filteredOutRows = {};
     const filters: { [key: string]: { filter: MatSelectTableFilter, value: any } } = {};
     Object.keys(this.filterControls.controls)
@@ -657,7 +654,7 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
 
       // User localeCompare for strings
       if (isString(aValue) && isString(bValue)) {
-        return (<string>aValue).localeCompare(<string>bValue) * (this.sort.direction === 'asc' ? 1 : -1);
+        return (<string>aValue).localeCompare(<string>bValue) * (direction === 'asc' ? 1 : -1);
       }
 
       // Try to convert to a Number type
@@ -666,10 +663,10 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
 
       // if one is number and other is String
       if (isString(aValue) && isNumber(bValue)) {
-        return (1) * (this.sort.direction === 'asc' ? 1 : -1);
+        return (1) * (direction === 'asc' ? 1 : -1);
       }
       if (isNumber(aValue) && isString(bValue)) {
-        return (-1) * (this.sort.direction === 'asc' ? 1 : -1);
+        return (-1) * (direction === 'asc' ? 1 : -1);
       }
 
       // Compare as Numbers otherwise
