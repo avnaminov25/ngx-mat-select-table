@@ -535,9 +535,6 @@ class MatSelectTableComponent {
      * @return {?}
      */
     applyColumnLevelFilters(data) {
-        if (isNullOrUndefined(data) || data.length < 1) {
-            return;
-        }
         this.filteredOutRows = {};
         /** @type {?} */
         const filters = {};
@@ -581,6 +578,9 @@ class MatSelectTableComponent {
                 const filterKey = filterKeys[k];
                 /** @type {?} */
                 const row = data[i];
+                if (isNullOrUndefined(row)) {
+                    return;
+                }
                 /** @type {?} */
                 const cellValue = row[filterKey];
                 if (isNullOrUndefined(cellValue)) {

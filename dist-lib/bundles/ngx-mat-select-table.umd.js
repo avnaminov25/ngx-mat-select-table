@@ -607,9 +607,6 @@
          */
             function (data) {
                 var _this = this;
-                if (util.isNullOrUndefined(data) || data.length < 1) {
-                    return;
-                }
                 this.filteredOutRows = {};
                 /** @type {?} */
                 var filters = {};
@@ -654,6 +651,9 @@
                         var filterKey = filterKeys[k];
                         /** @type {?} */
                         var row = data[i];
+                        if (util.isNullOrUndefined(row)) {
+                            return;
+                        }
                         /** @type {?} */
                         var cellValue = row[filterKey];
                         if (util.isNullOrUndefined(cellValue)) {

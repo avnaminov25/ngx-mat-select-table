@@ -602,9 +602,6 @@ var MatSelectTableComponent = /** @class */ (function () {
      */
     function (data) {
         var _this = this;
-        if (isNullOrUndefined(data) || data.length < 1) {
-            return;
-        }
         this.filteredOutRows = {};
         /** @type {?} */
         var filters = {};
@@ -648,6 +645,9 @@ var MatSelectTableComponent = /** @class */ (function () {
                 var filterKey = filterKeys[k];
                 /** @type {?} */
                 var row = data[i];
+                if (isNullOrUndefined(row)) {
+                    return;
+                }
                 /** @type {?} */
                 var cellValue = row[filterKey];
                 if (isNullOrUndefined(cellValue)) {
