@@ -102,10 +102,6 @@ export class MatSelectTableComponent implements ControlValueAccessor, OnInit, Af
    * Apply default sorting
    */
   @Input() defaultSort: Sort;
-  
-  @Input() resetOption: boolean;
-
-  @Input() resetOptionPlaceholder: string;
 
   @Input() resetOptionAction: () => void;
 

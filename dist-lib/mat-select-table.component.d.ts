@@ -56,8 +56,6 @@ export declare class MatSelectTableComponent implements ControlValueAccessor, On
      * Apply default sorting
      */
     defaultSort: Sort;
-    resetOption: boolean;
-    resetOptionPlaceholder: string;
     resetOptionAction: () => void;
     close: EventEmitter<boolean>;
     private matSelect;
